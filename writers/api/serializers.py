@@ -1,9 +1,9 @@
 from rest_framework import serializers
-
 from .models import *
 
 
 class GenresSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Genres
         depth = 0
@@ -11,6 +11,7 @@ class GenresSerializer(serializers.ModelSerializer):
 
 
 class CitysSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = City
         depth = 0
@@ -18,6 +19,7 @@ class CitysSerializer(serializers.ModelSerializer):
 
 
 class WritersSerializer(serializers.ModelSerializer):
+
     class Meta:
         model = Writer
         depth = 1
