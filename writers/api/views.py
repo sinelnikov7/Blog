@@ -3,8 +3,8 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
-from .models import *
-from .serializers import *
+from .models import City, Genres, Writer
+from .serializers import СitiesSerializer, GenresSerializer, WritersSerializer
 
 
 class GetGenres(APIView):
@@ -15,11 +15,11 @@ class GetGenres(APIView):
         return Response(ready_data)
 
 
-class GetCitys(APIView):
+class GetCities(APIView):
 
     def get(self, request):
         get_data = City.objects.all()
-        ready_data = CitysSerializer(get_data, many=True).data
+        ready_data = СitiesSerializer(get_data, many=True).data
         return Response(ready_data)
 
 

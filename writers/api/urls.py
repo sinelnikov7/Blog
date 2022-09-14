@@ -1,9 +1,9 @@
 from django.urls import path
 
-from .views import *
+from .views import GetCities, GetGenres, GetWriters
 
 urlpatterns = [
-    path('getgenres/', GetGenres.as_view()),
-    path('getcitys/', GetCitys.as_view()),
-    path('getwriters/', GetWriters.as_view()),
+    path('genres/', GetGenres.as_view()),
+    path('cities/', GetCities.as_view()),
+    path('writers/', GetWriters.as_view()),
 ]
