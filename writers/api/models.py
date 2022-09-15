@@ -32,4 +32,16 @@ class Writer(models.Model):
 
     def __str__(self):
         return f'{self.firstname} {self.lastname}'
+
+
+class Book(models.Model):
+
+    name = models.CharField(max_length=100, verbose_name='Название')
+    writer = models.ForeignKey(Writer, related_name='books',
+                             verbose_name='Писатель',
+                             on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.name
+
 # Create your models here.

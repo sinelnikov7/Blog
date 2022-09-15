@@ -91,7 +91,7 @@ WSGI_APPLICATION = 'writers.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
+        'NAME': 'for_git',
         'USER': 'postgres',
         'PASSWORD': '123',
         'HOST': 'localhost',

@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from .models import City, Genres, Writer
+from .models import City, Genres, Writer, Book
 
 
 class GenresSerializer(serializers.ModelSerializer):
@@ -23,5 +23,13 @@ class WritersSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Writer
+        depth = 1
+        fields = '__all__'
+
+
+class BooksSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Book
         depth = 1
         fields = '__all__'
