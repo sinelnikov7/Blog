@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for book in books %}
+<p><a href="{% url 'crud:detail' pk=book.pk %}">{{ book.name }} Id = {{book.id}}</a>
+    <a href="{% url 'crud:change_book' pk=book.pk %}">
+        <button style="margin-left:10px;">Редактировать</button></a>
+    <a href="{% url 'crud:delete_book' pk=book.pk %}">
+        <button style="margin-left:10px;">Удалить</button></a></p>
+<p>{{ book.writer }}</p>
+{% endfor %}
+<form action="" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button>Создать</button>
+</form>
+</body>
+</html>
