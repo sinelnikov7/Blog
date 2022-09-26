@@ -8,11 +8,15 @@
 <form action="" method="POST">
     {% csrf_token %}
     <p>Название</p>
-    <input type="text" name="name" value="qqq">
+    <input type="text" name="name" value="{{book.name}}">
     <p>Автор</p>
     <select name="writer" id="writer">
         {% for writer in writers %}
+        {% if writer.id == book.writer_id %}
+        <option value="{{ writer.id }}" selected>{{ writer.firstname }} {{ writer.lastname }}</option>
+        {% else %}
         <option value="{{ writer.id }}">{{ writer.firstname }} {{ writer.lastname }}</option>
+        {% endif %}
         {% endfor %}
     </select>
     <button>Изменить</button>

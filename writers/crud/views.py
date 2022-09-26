@@ -16,7 +16,7 @@ def get_all_books(request):
     if request.method == "POST":
         name = request.POST.get("name")
         writer = int(request.POST.get("writer"))
-        book = Book.objects.create(name=name, writer_id=writer)
+        Book.objects.create(name=name, writer_id=writer)
         return redirect('crud:get_all_books')
     return render(request, 'get_all_books.html', context)
 
@@ -32,10 +32,10 @@ def delete_book(request, pk):
     book.delete()
     return redirect('crud:get_all_books')
 
-
 def change_book(request, pk):
     book = Book.objects.get(id=pk)
     writers = Writer.objects.all()
+    print(book.writer_id, 'qqqqqqq')
     context = {
         'book': book,
         'writers': writers,
@@ -43,7 +43,10 @@ def change_book(request, pk):
     if request.method == "POST":
         name = request.POST.get("name")
         writer = int(request.POST.get("writer"))
-        book = Book.objects.create(name=name, writer_id=writer)
+        book = Book.objects.get(id=pk)
+        book.name = name
+        book.writer_id = writer
+        book.save()
         return redirect('crud:get_all_books')
-    return render(request, 'get_all_books.html', context)
-# Create your views here.
+    return render(request, 'change_book.html', context)
+
