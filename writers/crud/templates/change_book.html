@@ -7,7 +7,14 @@
 <body>
 <form action="" method="POST">
     {% csrf_token %}
-    {{ form.as_p }}
+    <p>Название</p>
+    <input type="text" name="name" value="qqq">
+    <p>Автор</p>
+    <select name="writer" id="writer">
+        {% for writer in writers %}
+        <option value="{{ writer.id }}">{{ writer.firstname }} {{ writer.lastname }}</option>
+        {% endfor %}
+    </select>
     <button>Изменить</button>
 </form>
 </body>
