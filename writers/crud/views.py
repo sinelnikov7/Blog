@@ -5,7 +5,6 @@ from django.views.generic import UpdateView
 from api.models import Book, Genres, Writer
 from crud.forms import BookAddForm
 
-
 def get_all_books(request):
     books = Book.objects.all().order_by('id')
     writers = Writer.objects.all()
