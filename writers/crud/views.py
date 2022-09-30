@@ -8,14 +8,20 @@ from crud.forms import BookAddForm
 def get_all_books(request):
     books = Book.objects.all().order_by('id')
     writers = Writer.objects.all()
+    genres = Genres.objects.all()
     context = {
         'books': books,
         'writers': writers,
+        'genres': genres,
     }
     if request.method == "POST":
         name = request.POST.get("name")
         writer = int(request.POST.get("writer"))
-        Book.objects.create(name=name, writer_id=writer)
+        genres = request.POST.getlist("genres")
+        book = Book(name=name, writer_id=writer)
+        book.save()
+        for genre in genres:
+            book.genres.add(genre)
         return redirect('crud:get_all_books')
     return render(request, 'get_all_books.html', context)
 
@@ -34,17 +40,20 @@ def delete_book(request, pk):
 def change_book(request, pk):
     book = Book.objects.get(id=pk)
     writers = Writer.objects.all()
-    print(book.writer_id, 'qqqqqqq')
+    genres = Genres.objects.all()
     context = {
         'book': book,
         'writers': writers,
+        'genres': genres,
     }
     if request.method == "POST":
         name = request.POST.get("name")
         writer = int(request.POST.get("writer"))
+        genres = request.POST.getlist("genres")
         book = Book.objects.get(id=pk)
         book.name = name
         book.writer_id = writer
+        book.genres.set(genres)
         book.save()
         return redirect('crud:get_all_books')
     return render(request, 'change_book.html', context)

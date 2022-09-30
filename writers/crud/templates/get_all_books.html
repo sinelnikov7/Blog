@@ -7,11 +7,17 @@
 <body>
 {% for book in books %}
 <p><a href="{% url 'crud:detail' pk=book.pk %}">{{ book.name }} Id = {{book.id}}</a>
+
+
     <a href="{% url 'crud:change_book' pk=book.pk %}">
         <button style="margin-left:10px;">Редактировать</button></a>
     <a href="{% url 'crud:delete_book' pk=book.pk %}">
         <button style="margin-left:10px;">Удалить</button></a></p>
 <p>{{ book.writer }}</p>
+{% for genre in book.genres.all %}
+    <strong>{{ genre.name }}</strong>
+    <p>{{ genre.info }}</p>
+    {% endfor %}
 {% endfor %}
 <form action="" method="POST">
     {% csrf_token %}
@@ -23,6 +29,12 @@
         <option value="{{ writer.id }}">{{ writer.firstname }} {{ writer.lastname }}</option>
         {% endfor %}
 </select>
+    <p>Жанры:</p>
+    <select multiple id="genres" name="genres">
+        {% for genre in genres %}
+        <option value="{{ genre.id }}"> {{ genre.name }}</option>
+        {% endfor %}
+    </select>
     <button>Создать</button>
 </form>
 </body>

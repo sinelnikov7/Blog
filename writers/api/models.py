@@ -40,6 +40,7 @@ class Book(models.Model):
     writer = models.ForeignKey(Writer, related_name='books',
                              verbose_name='Писатель',
                              on_delete=models.CASCADE)
+    genres = models.ManyToManyField(Genres)
 
     def __str__(self):
         return self.name

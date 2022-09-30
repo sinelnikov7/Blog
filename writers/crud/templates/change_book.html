@@ -19,7 +19,17 @@
         {% endif %}
         {% endfor %}
     </select>
-    <button>Изменить</button>
+    <p>Жанры:</p>
+    <select name="genres" id="genres" multiple>
+        {% for genre in genres %}
+        {% if genre in book.genres.all %}
+        <option value="{{ genre.id }}" selected> {{ genre.name }}</option>
+        {% else %}
+        <option value="{{ genre.id }}"> {{ genre.name }}</option>
+        {% endif %}
+        {% endfor %}
+    </select>
+    <br><button>Изменить</button>
 </form>
 </body>
 </html>
