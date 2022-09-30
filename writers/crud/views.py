@@ -3,16 +3,18 @@ from django.urls import reverse_lazy
 from django.views.generic import UpdateView
 
 from api.models import Book, Genres, Writer
-from crud.forms import BookAddForm
+from .forms import BookForm
 
 def get_all_books(request):
     books = Book.objects.all().order_by('id')
     writers = Writer.objects.all()
     genres = Genres.objects.all()
+    forms = BookForm()
     context = {
         'books': books,
         'writers': writers,
         'genres': genres,
+        'forms': forms,
     }
     if request.method == "POST":
         name = request.POST.get("name")
@@ -39,12 +41,9 @@ def delete_book(request, pk):
 
 def change_book(request, pk):
     book = Book.objects.get(id=pk)
-    writers = Writer.objects.all()
-    genres = Genres.objects.all()
+    forms = BookForm(initial={'name': book.name, 'writer': book.writer, 'genres': book.genres.all})
     context = {
-        'book': book,
-        'writers': writers,
-        'genres': genres,
+        'forms': forms,
     }
     if request.method == "POST":
         name = request.POST.get("name")

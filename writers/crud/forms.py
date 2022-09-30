@@ -1,10 +1,10 @@
 from django import forms
 
-from api.models import Book
+from api.models import Book, Genres, Writer
 
 
-class BookAddForm(forms.ModelForm):
+class BookForm(forms.Form):
 
-    class Meta:
-        model = Book
-        fields = '__all__'
+    name = forms.CharField(max_length=100, label='Название')
+    writer = forms.ModelChoiceField(widget=forms.Select, queryset=Writer.objects.all(), label='Писатель')
+    genres = forms.ModelMultipleChoiceField(widget=forms.SelectMultiple, queryset=Genres.objects.all(), label='Жанры')

@@ -21,20 +21,7 @@
 {% endfor %}
 <form action="" method="POST">
     {% csrf_token %}
-    <p>Название</p>
-    <input type="text" name="name">
-    <p>Автор</p>
-    <select id="writer" name="writer">
-        {% for writer in writers %}
-        <option value="{{ writer.id }}">{{ writer.firstname }} {{ writer.lastname }}</option>
-        {% endfor %}
-</select>
-    <p>Жанры:</p>
-    <select multiple id="genres" name="genres">
-        {% for genre in genres %}
-        <option value="{{ genre.id }}"> {{ genre.name }}</option>
-        {% endfor %}
-    </select>
+    {{ forms.as_p }}
     <button>Создать</button>
 </form>
 </body>
