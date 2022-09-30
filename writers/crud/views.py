@@ -17,13 +17,9 @@ def get_all_books(request):
         'forms': forms,
     }
     if request.method == "POST":
-        name = request.POST.get("name")
-        writer = int(request.POST.get("writer"))
-        genres = request.POST.getlist("genres")
-        book = Book(name=name, writer_id=writer)
-        book.save()
-        for genre in genres:
-            book.genres.add(genre)
+        form = BookForm(request.POST)
+        if form.is_valid():
+            form.save()
         return redirect('crud:get_all_books')
     return render(request, 'get_all_books.html', context)
 
@@ -41,19 +37,14 @@ def delete_book(request, pk):
 
 def change_book(request, pk):
     book = Book.objects.get(id=pk)
-    forms = BookForm(initial={'name': book.name, 'writer': book.writer, 'genres': book.genres.all})
+    forms = BookForm(instance=book)
     context = {
         'forms': forms,
     }
     if request.method == "POST":
-        name = request.POST.get("name")
-        writer = int(request.POST.get("writer"))
-        genres = request.POST.getlist("genres")
-        book = Book.objects.get(id=pk)
-        book.name = name
-        book.writer_id = writer
-        book.genres.set(genres)
-        book.save()
+        form = BookForm(request.POST, instance=book)
+        if form.is_valid():
+            form.save()
         return redirect('crud:get_all_books')
     return render(request, 'change_book.html', context)
 
