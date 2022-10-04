@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'api',
-    'crud'
+    'crud',
+    'else'
 ]
 
 MIDDLEWARE = [
