@@ -23,6 +23,7 @@ import debug_toolbar
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('api.urls')),
+    path('user/', include('add_user.urls')),
 ]
 
 if settings.DEBUG:
